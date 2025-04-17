@@ -61,3 +61,68 @@ function copiarLink() {
     });
   }
   
+  // funcçã para copiar termo
+  function copiarTermo() {
+    const termo = document.getElementById("resultado").textContent;
+    if (!termo.trim()) return;
+  
+    navigator.clipboard.writeText(termo).then(() => {
+      const btn = document.getElementById('copiarTermo');
+      btn.textContent = 'Termo copiado!';
+      btn.classList.remove('secondary');
+      btn.classList.add('success');
+  
+      setTimeout(() => {
+        btn.textContent = 'Copiar termo';
+        btn.classList.remove('success');
+        btn.classList.add('secondary');
+      }, 3000);
+    }).catch(() => {
+      alert('Erro ao copiar o termo.');
+    });
+  }
+  
+  // funcção para menu de compartilhamento
+  function toggleMenu() {
+    const menu = document.getElementById('shareMenu');
+    menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+  }
+  
+  // Fecha o menu ao clicar fora
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('shareMenu');
+    const botao = document.getElementById('botaoShare');
+    if (!menu.contains(e.target) && !botao.contains(e.target)) {
+      menu.style.display = 'none';
+    }
+  });
+  
+  // Atualiza os links dinâmicos ao carregar
+  window.addEventListener('DOMContentLoaded', () => {
+    const url = encodeURIComponent(window.location.href);
+    const msg = encodeURIComponent('Veja esse site de tendências!');
+    document.getElementById('whatsappShare').href = `https://wa.me/?text=${msg}%20${url}`;
+    document.getElementById('twitterShare').href = `https://twitter.com/intent/tweet?text=${msg}&url=${url}`;
+    document.getElementById('facebookShare').href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+  });
+
+  // Garante o funcionamento do menu de compartilhamento
+  window.addEventListener('DOMContentLoaded', () => {
+    const url = encodeURIComponent(window.location.href);
+    const msg = encodeURIComponent('Veja esse site de tendências!');
+  
+    // WhatsApp
+    document.getElementById('whatsappShare').href = `https://wa.me/?text=${msg}%20${url}`;
+  
+    // Twitter
+    document.getElementById('twitterShare').href = `https://twitter.com/intent/tweet?text=${msg}&url=${url}`;
+  
+    // Facebook
+    document.getElementById('facebookShare').href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+  
+    // Instagram
+    // (O Instagram não permite links diretos de compartilhamento via URL, então adicionei para direcionar ao perfil, pode ser modificado para um link específico ou app)
+    document.getElementById('instagramShare').href = `https://www.instagram.com`;
+  
+  });
+  

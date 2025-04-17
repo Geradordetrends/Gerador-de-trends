@@ -136,8 +136,72 @@ button.success {
 }
 .links-footer a:hover { text-decoration: underline; }
 
-/* Responsividade */
-@media (max-width: 600px) {
-  .container h2 { font-size: 2.2rem; }
-  .generator-card { padding: 1.5rem; }
-}
+/* Menu de compartilhamento */
+.share-menu-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .share-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 4px;
+    z-index: 1;
+  }
+  
+  .share-menu button,
+  .share-menu a {
+    display: block;
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    text-align: left;
+    color: #333;
+    font-size: 14px;
+  }
+  
+  .share-menu a {
+    text-decoration: none;
+  }
+  
+  .share-menu button:hover,
+  .share-menu a:hover {
+    background-color: #ddd;
+  }
+  
+  button.secondary {
+    background-color: #2d2d2d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button.secondary:hover {
+    background-color: #333;
+  }
+  
+  /* Estilos para o Rodapé */
+.footer {
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    padding: 20px 0;
+    background-color: #f8f8f8;
+    border-top: 1px solid #ddd;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 40px;
+  }
+  
+  .footer p {
+    margin: 0;
+  }
+  
