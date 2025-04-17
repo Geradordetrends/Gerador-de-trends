@@ -119,3 +119,41 @@ document.querySelector('.primary').addEventListener('click', () => {
 document.getElementById('copiarTermo').addEventListener('click', () => {
   trackEvent('copiar_termo');
 });
+
+// Avaliações
+
+const form = document.querySelector("#form-avaliacao");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const nome = document.querySelector("#nome").value;
+  const nota = document.querySelector("input[name='nota']:checked").value;
+  const comentario = document.querySelector("#comentario").value;
+
+  const dados = {
+    nome,
+    nota,
+    comentario
+  };
+
+  try {
+    const resposta = await fetch("https://script.google.com/macros/s/AKfycbwGhfluItjGteRTekNtUxdmlVM-Gh1KNozr8wdrkfrPJx_d17JxgN-JlJb0t4PheUC5zQ/exec", {
+      method: "POST",
+      body: JSON.stringify(dados),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (resposta.ok) {
+      alert("Avaliação enviada com sucesso!");
+      form.reset();
+    } else {
+      alert("Erro ao enviar avaliação.");
+    }
+  } catch (erro) {
+    console.error("Erro:", erro);
+    alert("Erro de conexão.");
+  }
+});
