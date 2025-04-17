@@ -126,31 +126,39 @@
   </form>
   
   <script>
-  document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-  
-    const data = {
-      nome: e.target.nome.value,
-      comentario: e.target.comentario.value,
-      nota: parseInt(e.target.nota.value),
-    };
-  
-    await fetch('https://api.baserow.io/api/database/rows/table/508714/?user_field_names=true', {
-      method: 'POST',
-      headers: {
+    document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+    
+      const data = {
+        nome: e.target.nome.value,
+        email: e.target.email.value,
+        comentario: e.target.comentario.value,
+        nota: parseInt(e.target.nota.value),
+      };
+    
+      try {
+        const response = await fetch('https://api.baserow.io/api/database/rows/table/508714/?user_field_names=true', {
+          method: 'POST',
+          headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'xMo6RITuc6ngEOf63DAwDmVRsTn5psDm'
+        'Authorization': 'Token xMo6RITuc6ngEOf63DAwDmVRsTn5psDm'
       },
       body: JSON.stringify(data)
-    }).then(res => {
-      if (res.ok) {
-        alert('Enviado com sucesso!');
-      } else {
-        alert('Erro ao enviar.');
-      }
     });
-  });
-  </script>
+
+    if (response.ok) {
+      alert('Enviado com sucesso!');
+    } else {
+      const err = await response.json();
+      console.error(err);
+      alert('Erro ao enviar: ' + JSON.stringify(err));
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Erro inesperado: ' + err.message);
+  }
+});
+</script>
   
 
   <!-- Rodapé -->
