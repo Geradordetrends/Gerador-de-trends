@@ -1,17 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Gerador de Termos em Alta</title>
-  <link rel="stylesheet" href="styles/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Trends</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-  <h1>🎯 Gerador de Termo em Alta</h1>
-  
-  <button onclick="sortearTermo()">Sortear Termo</button>
-  
-  <p id="resultado"></p>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">
+            <img src="images/logo-do-gerador-de-trends.png" alt="Gerador de Trends" />
+            <h1>Gerador de Trends</h1>
+        </div>
+        <nav>
+            <a href="sobre.html">Sobre</a>
+            <a href="termos-de-uso.html">Termos</a>
+        </nav>
+    </header>
 
-  <script src="scripts/main.js"></script>
+    <!-- Conteúdo principal -->
+    <main class="container">
+        <h2>Descubra o Que Está Bombando Agora</h2>
+        <p class="subhead">Selecione Brasil ou Mundo e gere um termo em alta para inspirar seu conteúdo, vídeo ou conversa.</p>
+
+        <!-- Seletor de Região -->
+        <div class="seletor-regiao">
+            <select id="regiao" onchange="atualizarTermos()">
+                <option value="" disabled selected>Escolha sua região</option>
+                <option value="brasil">Brasil</option>
+                <option value="mundo">Mundo</option>
+            </select>
+        </div>
+
+        <!-- Botão de Geração -->
+        <button class="primary" onclick="sortearTermo()">Mostre-me o Trend!</button>
+
+        <!-- Resultado -->
+        <p id="resultado">🔍 Seu trend de hoje aparecerá aqui!</p>
+
+        <!-- Botão de Copiar -->
+        <button id="compartilhar" class="secondary" onclick="copiarLink()">Compartilhar Site</button>
+
+
+        <!-- Benefícios -->
+        <div class="benefits">
+            <h3>Por que usar?</h3>
+            <div class="benefit-list">
+              <div class="benefit-item">✔️ Gratuito e sem cadastro</div>
+              <div class="benefit-item">🔄 Dados do Google Trends & YouTube</div>
+              <div class="benefit-item">💡É um poderoso gerador de ideias</div>
+            </div>
+          </div>
+    </main>
+
+    <script src="scripts/main.js"></script>
 </body>
 </html>
