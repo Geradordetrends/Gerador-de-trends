@@ -1,101 +1,188 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Trends</title>
-    <link rel="stylesheet" href="styles/style.css">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GEXK3CQZ66"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  // Substitua pelo seu Measurement ID
+  gtag('config', 'G-GEXK3CQZ66', {
+    page_path: window.location.pathname,
+    page_title: document.title,
+    send_page_view: true
+  });
+</script>
+
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>Gerador de Tendências | Descubra com um Clique</title>
+  <meta name="description" content="Gere ideias com base nas tendências atuais de múltiplas fontes — incluindo Google Trends, redes sociais e buscadores. Ideal para criadores de conteúdo." />
+  <meta name="keywords" content="tendências, termos populares, criadores de conteúdo, marketing digital, Google Trends, redes sociais" />
+  <meta name="author" content="Seu Nome ou Projeto" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Gerador de Tendências - Para Criadores de Conteúdo" />
+  <meta property="og:description" content="Descubra o que está em alta com um clique. Dados de múltiplas fontes confiáveis da internet." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://seusite.com" />
+  <meta property="og:image" content="https://seusite.com/imagem-social.jpg" />
+
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="styles/style.css" />
+
+  <!-- Estilos locais para layout responsivo e espaçamento -->
+  <style>
+    /* Container com padding lateral para dar espaço */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+    /* Grid responsivo principal */
+    .main-grid {
+      display: grid;
+      gap: 3rem;
+    }
+    @media (min-width: 768px) {
+      .main-grid {
+        grid-template-columns: 1.2fr 1fr;
+        align-items: start;
+      }
+    }
+    @media (max-width: 767px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* Card de geração e benefícios com padding interno */
+    .generator-card,
+    .benefits {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    /* Ajuste de tipografia para evitar compactação */
+    .generator-card h2,
+    .benefits h3 {
+      margin-bottom: 1rem;
+    }
+    .generator-card .subhead,
+    .benefit-list {
+      margin-bottom: 1.5rem;
+    }
+  </style>
 </head>
 <body>
-    <!-- Cabeçalho -->
-    <header>
-        <div class="logo">
-            <img src="images/logo-do-gerador-de-trends.png" alt="Gerador de Trends" />
-            <h1>Gerador de Trends</h1>
-        </div>
-        <nav>
-            <a href="sobre.html">Sobre</a>
-            <a href="termos-de-uso.html">Termos</a>
-        </nav>
-    </header>
+  <!-- Cabeçalho -->
+  <header>
+    <div class="logo">
+      <img src="images/logo-do-gerador-de-trends.png" alt="Gerador de Tendências" />
+      <h1>Gerador de Tendências</h1>
+    </div>
+    <nav>
+      <a href="sobre.html">Sobre</a>
+      <a href="termos-de-uso.html">Termos</a>
+    </nav>
+  </header>
 
-    <!-- Conteúdo principal -->
-    <main class="container">
-        <h2>Descubra o Que Está Bombando Agora</h2>
-        <p class="subhead">Selecione Brasil ou Mundo e gere um termo em alta para inspirar seu conteúdo, vídeo ou conversa.</p>
+  <!-- Conteúdo principal -->
+  <main class="container">
+    <!-- Layout responsivo: generator e benefits lado a lado em desktop -->
+    <div class="main-grid">
+      <!-- Gerador de tendências -->
+      <div class="generator-card">
+        <h2>Descubra o que está em alta com um clique.</h2>
+        <p class="subhead">Inspire seu próximo conteúdo usando dados de diversas fontes confiáveis da internet.</p>
 
         <!-- Seletor de Região -->
         <div class="seletor-regiao">
-            <select id="regiao" onchange="atualizarTermos()">
-                <option value="" disabled selected>Escolha sua região</option>
-                <option value="brasil">Brasil</option>
-                <option value="mundo">Mundo</option>
-            </select>
+          <select id="regiao" onchange="atualizarTermos()">
+            <option value="" disabled selected>Escolha sua região</option>
+            <option value="brasil">Brasil</option>
+            <option value="mundo">Mundo</option>
+          </select>
         </div>
 
-        <!-- Botão de Geração -->
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-            <button class="primary" onclick="sortearTermo()">Mostre-me o Trend!</button>
-            <button id="copiarTermo" class="secondary" onclick="copiarTermo()">Copiar termo</button>
-          </div>
-          
+        <!-- Ações: Gerar e Copiar -->
+        <div class="action-buttons" style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
+          <button class="primary" onclick="sortearTermo()">Gerar tendência</button>
+          <button id="copiarTermo" class="secondary" onclick="copiarTermo()">Copiar termo</button>
+        </div>
 
         <!-- Resultado -->
-        <p id="resultado">🔍 Seu trend de hoje aparecerá aqui!</p>
+        <p id="resultado">🔍 Seu termo aparecerá aqui!</p>
+      </div>
 
-        <!-- Botão de Compartilhar -->
-        <div class="share-menu-container">
-            <button id="botaoShare" class="secondary" onclick="toggleMenu()">Compartilhar ▾</button>
-            <div id="shareMenu" class="share-menu">
-              <!-- Copiar Link -->
-              <button onclick="copiarLink()">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.9 12a5.1 5.1 0 0 1 5.1-5.1h4a1 1 0 0 1 0 2h-4A3.1 3.1 0 0 0 5.9 12a3.1 3.1 0 0 0 3.1 3.1h4a1 1 0 0 1 0 2h-4A5.1 5.1 0 0 1 3.9 12zm6-1a1 1 0 1 1 0-2h7a5.1 5.1 0 1 1 0 10h-4a1 1 0 1 1 0-2h4a3.1 3.1 0 1 0 0-6h-7z"/></svg>
-                Copiar link
-              </button>
-              
-              <!-- WhatsApp -->
-              <a id="whatsappShare" target="_blank">
-                <svg viewBox="0 0 32 32"><path d="M16 0C7.2 0 0 7.2 0 16a15.9 15.9 0 0 0 2.3 8.3L0 32l8-2.3A16 16 0 1 0 16 0zm0 29.5a13.5 13.5 0 0 1-7-2l-.5-.3-4.7 1.3 1.3-4.6-.3-.6a13.3 13.3 0 0 1-2-7.1C3.3 8.5 9.6 2.2 17 2.2c7.4 0 13.7 6.3 13.7 13.8S24.4 29.5 16 29.5z"/></svg>
-                WhatsApp
-              </a>
-          
-              <!-- Twitter -->
-              <a id="twitterShare" target="_blank">
-                <svg viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37c-.84.5-1.76.87-2.75 1.07a4.28 4.28 0 0 0-7.3 3.9A12.13 12.13 0 0 1 3.15 4.7a4.26 4.26 0 0 0-.58 2.15 4.28 4.28 0 0 0 1.9 3.56 4.23 4.23 0 0 1-1.94-.54v.06c0 2 1.44 3.66 3.35 4.03a4.28 4.28 0 0 1-1.93.07 4.29 4.29 0 0 0 4 2.97 8.6 8.6 0 0 1-6.3 1.76 12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2v-.56A8.7 8.7 0 0 0 24 4.6a8.4 8.4 0 0 1-2.4.66 4.2 4.2 0 0 0 1.86-2.33"/></svg>
-                Twitter
-              </a>
-          
-              <!-- Facebook -->
-              <a id="facebookShare" target="_blank">
-                <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2c0-2 1.2-3 3-3 .9 0 1.8 0 2 .1v2.4H15c-1 0-1.2.5-1.2 1.1v1.5h2.5l-.4 3H13.8v7A10 10 0 0 0 22 12"/></svg>
-                Facebook
-              </a>
-          
-              <!-- Instagram -->
-              <a href="https://www.instagram.com" target="_blank">
-                <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2 .2 2.5.4.6.2 1 .5 1.5 1 .5.5.8.9 1 1.5.2.5.3 1.3.4 2.5.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 2-.4 2.5-.2.6-.5 1-1 1.5-.5.5-.9.8-1.5 1-.5.2-1.3.3-2.5.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.2-2.5-.4-.6-.2-1-.5-1.5-1s-.8-.9-1-1.5c-.2-.5-.3-1.3-.4-2.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-2 .4-2.5.2-.6.5-1 1-1.5s.9-.8 1.5-1c.5-.2 1.3-.3 2.5-.4C8.4 2.2 8.8 2.2 12 2.2zm0-2.2C8.7 0 8.3 0 7 .1 5.6.1 4.5.3 3.7.6 2.8.9 2.1 1.4 1.4 2.1.7 2.8.3 3.6.1 4.5 0 5.4 0 6.6 0 12c0 5.4 0 6.6.1 7.5.2.9.6 1.7 1.3 2.4.7.7 1.5 1.1 2.4 1.3.9.1 2.1.1 7.5.1s6.6 0 7.5-.1c.9-.2 1.7-.6 2.4-1.3.7-.7 1.1-1.5 1.3-2.4.1-.9.1-2.1.1-7.5s0-6.6-.1-7.5c-.2-.9-.6-1.7-1.3-2.4C21.7 1.4 20.9.9 20 .6c-.9-.3-2.1-.5-7.5-.5zm0 5.8a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 9.8a3.8 3.8 0 1 1 0-7.6 3.8 3.8 0 0 1 0 7.6zm6.4-10.8a1.4 1.4 0 1 0 0-2.8 1.4 1.4 0 0 0 0 2.8z"/></svg>
-                Instagram
-              </a>
-            </div>
-          </div>
+      <!-- Benefícios -->
+      <div class="benefits">
+        <h3>Por que usar?</h3>
+        <div class="benefit-list">
+          <div class="benefit-item">🚀 Conteúdos sempre atualizados</div>
+          <div class="benefit-item">📡 Dados em tempo real de múltiplas fontes (incluindo Google Trends)</div>
+          <div class="benefit-item">🌍 Tendências globais e locais</div>
+          <div class="benefit-item">📱 Compartilhe facilmente com um clique</div>
+        </div>
+      </div>
+    </div>
 
-        <!-- Benefícios -->
-        <div class="benefits">
-            <h3>Por que usar?</h3>
-            <div class="benefit-list">
-              <div class="benefit-item">✔️ Gratuito e sem cadastro</div>
-              <div class="benefit-item">🔄 Dados do Google Trends & YouTube</div>
-              <div class="benefit-item">💡É um poderoso gerador de ideias</div>
-            </div>
-          </div>
-    </main>
+    <!-- Seção de Doação e Compartilhamento em tabela -->
+    <div class="donation-share-section">
+      <table class="donation-table">
+        <thead>
+          <tr>
+            <th colspan="2">Você é um usuário feliz?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Compre-nos um café:</td>
+            <td><button class="secondary" onclick="window.location.href='https://www.buymeacoffee.com/SEU_USUARIO'">Doar</button></td>
+          </tr>
+          <tr>
+            <td>Compartilhar é se importar:</td>
+            <td class="share-buttons">
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://seusite.com" target="_blank">Facebook</a>
+              <a href="https://twitter.com/intent/tweet?url=https://seusite.com" target="_blank">Twitter</a>
+              <a href="https://www.reddit.com/submit?url=https://seusite.com" target="_blank">Reddit</a>
+              <a href="https://www.linkedin.com/shareArticle?url=https://seusite.com" target="_blank">LinkedIn</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Volte!</td>
+            <td><a href="javascript:window.location.reload();" class="secondary">Marcar página</a></td>
+          </tr>
+          <tr>
+            <td>Link para esta ferramenta:</td>
+            <td><input type="text" value="https://seusite.com" id="toolLink" readonly></td>
+          </tr>
+          <tr>
+            <td>Nos avalie!</td>
+            <td><button class="secondary">Avaliar</button></td>
+          </tr>
+          <tr>
+            <td>Enviar Comentários</td>
+            <td><button class="secondary" onclick="window.location.href='mailto:contato@seusite.com'">Contate-Nos</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <script src="scripts/main.js"></script>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <p>&copy; 2025 Gerador de Tendências. Feito com criatividade.</p>
+  </footer>
+
+  <script src="scripts/main.js"></script>
 </body>
 </html>
-
-<!-- Rodapé com Copyright -->
-<footer class="footer">
-    <p>&copy; 2025 Gerador de Trends. Todos os direitos reservados.</p>
-  </footer>
-  

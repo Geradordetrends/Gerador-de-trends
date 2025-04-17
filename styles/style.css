@@ -135,57 +135,6 @@ button.success {
   margin: 0 0.5rem; font-size: 0.9rem;
 }
 .links-footer a:hover { text-decoration: underline; }
-
-/* Menu de compartilhamento */
-.share-menu-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .share-menu {
-    display: none;
-    position: absolute;
-    background-color: white;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    border-radius: 4px;
-    z-index: 1;
-  }
-  
-  .share-menu button,
-  .share-menu a {
-    display: block;
-    margin: 5px 0;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border: none;
-    border-radius: 4px;
-    text-align: left;
-    color: #333;
-    font-size: 14px;
-  }
-  
-  .share-menu a {
-    text-decoration: none;
-  }
-  
-  .share-menu button:hover,
-  .share-menu a:hover {
-    background-color: #ddd;
-  }
-  
-  button.secondary {
-    background-color: #2d2d2d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  button.secondary:hover {
-    background-color: #333;
-  }
   
   /* Estilos para o Rodapé */
 .footer {
@@ -206,11 +155,111 @@ button.success {
   }
   
   @media (max-width: 480px) {
-    .share-menu {
-      right: 0;
-      left: 0;
-      margin: auto;
-      width: 90%;
-    }
+  .share-menu {
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 90%;
   }
-  
+}
+
+/* Estilo geral para a seção de doação e compartilhamento */
+.donation-share-section {
+  margin-top: 3rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.donation-table {
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+.donation-table th {
+  font-size: 1.5rem;
+  text-align: center;
+  background-color: #4285F4;
+  color: white;
+  padding: 10px;
+  border-radius: 8px 8px 0 0;
+}
+
+.donation-table td {
+  font-size: 1rem;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.donation-table input {
+  width: 80%;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  color: #333;
+}
+
+.donation-table a {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+.donation-table a:hover {
+  background-color: #ddd;
+}
+
+button.secondary {
+  background-color: #2d2d2d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+button.secondary:hover {
+  background-color: #333;
+}
+
+button.primary {
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+button.primary:hover {
+  background-color: #3367d6;
+  transform: translateY(-2px);
+}
+
+/* Garante que a seção de termos não seja afetada */
+.generator-card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
+}

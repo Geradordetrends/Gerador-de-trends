@@ -1,5 +1,5 @@
-const urlCSVBrasil = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTIzpUcmDHc3WShOfdmYm8Q_kRArltuIED0bl60NWIS-kX6Ud_-PeCn4NgYuZ-DG0wQiqcOT0JwG4bN/pub?output=csv";
-const urlCSVMundo = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSp0ri_74vNOA_LFpRtmCTFvCFWGumfBDs3pv9sYExADEeM-MxlnW5GXH1lOr7CooeCNP0ZU5QIHVgc/pub?output=csv";
+const urlCSVBrasil = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTRl-mFrT28Kzq5TAWm89A6OqVtKOZb2FWi5zd4lpu6Xvgin7VI-1R0LQugtkDxertXxZITNRelam-O/pub?output=csv";
+const urlCSVMundo = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTIDu9G79jdYgthuurSgm4YzHXkF0ydpWnNfXwDLdrNd_tC3Zdxf3HNWPhpN4L0e33p-SLXlkf4gJhY/pub?output=csv";
 
 let urlCSVAtual = urlCSVBrasil;  // Valor inicial é Brasil
 
@@ -119,3 +119,23 @@ function copiarLink() {
   
   });
   
+  // GA custom events
+function trackEvent(name) {
+  if (window.gtag) {
+    gtag('event', name, {
+      event_category: 'interação',
+      event_label: name,
+      value: 1
+    });
+  }
+}
+
+// No clique do botão “Gerar tendência”
+document.querySelector('.primary').addEventListener('click', () => {
+  trackEvent('gerar_tendencia');
+});
+
+// No clique do botão “Copiar termo”
+document.getElementById('copiarTermo').addEventListener('click', () => {
+  trackEvent('copiar_termo');
+});
