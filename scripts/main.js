@@ -69,7 +69,10 @@ function copiarLink() {
     if (!termo.trim()) return;
   
     navigator.clipboard.writeText(termo).then(() => {
-      const btn = document.getElementById('copiarTermo');
+      const btnCopiar = document.getElementById('copiarTermo');
+if (btnCopiar) {
+  btnCopiar.addEventListener('click', () => {
+    trackEvent('copiar_termo');
       btn.textContent = 'Termo copiado!';
       btn.classList.remove('secondary');
       btn.classList.add('success');
@@ -91,13 +94,15 @@ function copiarLink() {
   }
   
   // Fecha o menu ao clicar fora
-  document.addEventListener('click', function(e) {
+  document.addEventListener('click', function (e) {
     const menu = document.getElementById('shareMenu');
     const botao = document.getElementById('botaoShare');
-    if (!menu.contains(e.target) && !botao.contains(e.target)) {
+  
+    if (menu && botao && !menu.contains(e.target) && !botao.contains(e.target)) {
       menu.style.display = 'none';
     }
   });
+  
   
   // GA custom events
 function trackEvent(name) {
