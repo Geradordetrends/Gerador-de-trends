@@ -98,26 +98,6 @@ function copiarLink() {
       menu.style.display = 'none';
     }
   });
-
-  // Garante o funcionamento do menu de compartilhamento
-  window.addEventListener('DOMContentLoaded', () => {
-    const url = encodeURIComponent(window.location.href);
-    const msg = encodeURIComponent('Veja esse site de tendências!');
-  
-    // WhatsApp
-    document.getElementById('whatsappShare').href = `https://wa.me/?text=${msg}%20${url}`;
-  
-    // Twitter
-    document.getElementById('twitterShare').href = `https://twitter.com/intent/tweet?text=${msg}&url=${url}`;
-  
-    // Facebook
-    document.getElementById('facebookShare').href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-  
-    // Instagram
-    // (O Instagram não permite links diretos de compartilhamento via URL, então adicionei para direcionar ao perfil, pode ser modificado para um link específico ou app)
-    document.getElementById('instagramShare').href = `https://www.instagram.com`;
-  
-  });
   
   // GA custom events
 function trackEvent(name) {
