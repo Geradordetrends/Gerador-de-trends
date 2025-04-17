@@ -205,3 +205,12 @@ button.success {
     margin: 0;
   }
   
+  @media (max-width: 480px) {
+    .share-menu {
+      right: 0;
+      left: 0;
+      margin: auto;
+      width: 90%;
+    }
+  }
+  

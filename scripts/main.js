@@ -23,6 +23,8 @@ async function sortearTermo() {
             .split('\n')        // separa por linha
             .slice(1)           // remove o cabeçalho
             .map(l => l.trim()) // limpa espaços
+            .filter(l => l.length > 0); // <- filtra qunado estver  vazio
+
 
         const sorteado = termos[Math.floor(Math.random() * termos.length)];
         document.getElementById('resultado').innerText = `🔍 ${sorteado}`;
@@ -95,15 +97,6 @@ function copiarLink() {
     if (!menu.contains(e.target) && !botao.contains(e.target)) {
       menu.style.display = 'none';
     }
-  });
-  
-  // Atualiza os links dinâmicos ao carregar
-  window.addEventListener('DOMContentLoaded', () => {
-    const url = encodeURIComponent(window.location.href);
-    const msg = encodeURIComponent('Veja esse site de tendências!');
-    document.getElementById('whatsappShare').href = `https://wa.me/?text=${msg}%20${url}`;
-    document.getElementById('twitterShare').href = `https://twitter.com/intent/tweet?text=${msg}&url=${url}`;
-    document.getElementById('facebookShare').href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
   });
 
   // Garante o funcionamento do menu de compartilhamento
