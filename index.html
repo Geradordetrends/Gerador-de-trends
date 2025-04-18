@@ -105,61 +105,35 @@
           </tr>
           <tr>
             <td>Link para esta ferramenta:</td>
-            <td><input type="text" value="https://geradordetrends.github.io/Gerador-de-trends/" id="toolLink" readonly></td>
+            <td><input type="text" value="https://geradordetrends.github.io/Gerador-de-trends/" id="toolLink" readonly>
+            <button id="copiarLink" class="secondary" onclick="copiarLinkFerramenta()">Copiar</button>
+            </td>
           </tr>
           <tr>
-            <td><a href="mailto:seuemail@exemplo.com?subject=Olá&body=Gostaria de saber mais sobre...">
-              <button class="secondary">Entrar em contato</button>
-            </a></td>
+            <td>Contate-nos:</td>
+            <td><a href="#" onclick="abrirContato()" class="secondary">Entrar em contato</a>
+
+              <script>
+              function abrirContato() {
+                // Tenta abrir o cliente de e-mail padrão
+                const mailtoLink = "mailto:geradordetrends@gmail.com?subject=Olá&body=Gostaria de saber mais sobre...";
+                const gmailLink = "https://mail.google.com/mail/?view=cm&fs=1&to=geradordetrends@gmail.com&su=Olá&body=Gostaria de saber mais sobre...";
+              
+                // Abre o mailto
+                window.location.href = mailtoLink;
+              
+                // Depois de 1,5s, assume que falhou e tenta abrir o Gmail
+                setTimeout(() => {
+                  window.open(gmailLink, '_blank');
+                }, 1500);
+              }
+              </script></td>
           </tr>
         </tbody>
       </table>
     </div>
-
+    
   </main>
-
-  <form id="feedbackForm">
-    <input type="text" name="nome" placeholder="Seu nome" required>
-    <textarea name="comentario" placeholder="Comentário"></textarea>
-    <input type="number" name="nota" min="1" max="5" required>
-    <button type="submit">Enviar</button>
-  </form>
-  
-  <script>
-    document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-    
-      const data = {
-        nome: e.target.nome.value,
-        email: e.target.email.value,
-        comentario: e.target.comentario.value,
-        nota: parseInt(e.target.nota.value),
-      };
-    
-      try {
-        const response = await fetch('https://api.baserow.io/api/database/rows/table/508714/?user_field_names=true', {
-          method: 'POST',
-          headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Token xMo6RITuc6ngEOf63DAwDmVRsTn5psDm'
-      },
-      body: JSON.stringify(data)
-    });
-
-    if (response.ok) {
-      alert('Enviado com sucesso!');
-    } else {
-      const err = await response.json();
-      console.error(err);
-      alert('Erro ao enviar: ' + JSON.stringify(err));
-    }
-  } catch (err) {
-    console.error(err);
-    alert('Erro inesperado: ' + err.message);
-  }
-});
-</script>
-  
 
   <!-- Rodapé -->
   <footer class="footer">

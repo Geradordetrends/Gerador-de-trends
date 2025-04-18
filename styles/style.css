@@ -208,11 +208,11 @@ button.secondary:hover {
 
 /* Seção de Doações e Compartilhamento */
 .donation-share-section {
-  margin-top: 3rem;
-  padding: 1rem;
+  margin-top: 5rem;           /* antes: 3rem */
+  padding: 2rem;            /* antes: 1rem */
   background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;        /* antes: 8px */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* antes: 0 4px 12px */
 }
 .donation-table {
   width: 100%;
@@ -234,7 +234,7 @@ button.secondary:hover {
   border-bottom: 1px solid #ddd;
 }
 .donation-table input {
-  width: 80%;
+  width: 75%;
   margin: 1rem auto;
   padding: 0.5rem;
   text-align: center;
