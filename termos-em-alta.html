@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gerador de Trends | Termos em Alta</title>
+  <link rel="stylesheet" href="/Gerador-de-Trends/styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="terms-page">
+
+  <!-- Header padronizado -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <img src="Gerador-de-Trends/images/logo-do-gerador-de-trends.png" alt="Logo do site" />
+        <h1>Gerador de Trends</h1>
+      </div>
+      <nav class="nav-menu">
+        <a href="index.html">Início</a>
+        <a href="termos-em-alta.html" class="active">Termos em Alta</a>
+        <a href="https://geradordetrends.github.io/Gerador-de-Trends/sobre/">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <!-- Conteúdo principal -->
+  <main class="container terms-page">
+    <section class="trend-section">
+      <h2 class="trend-title">📈 Termos em Alta</h2>
+      <p class="intro-description">
+        Veja os termos mais buscados no momento com base em <strong>dados do Google Trends</strong>. Clique para copiar e usar como inspiração!
+      </p>
+
+      <div class="button-row" style="margin-bottom:1rem;">
+        <button id="btn-brasil" class="primary" aria-pressed="true">Brasil</button>
+        <button id="btn-mundo" class="primary" aria-pressed="false">Mundo</button>
+      </div>
+      
+
+      <ul id="lista-termos" class="result-list"></ul>
+    </section>
+  </main>
+
+  <!-- Footer padronizado -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Gerador de Tendências — Feito com 💙 por <a href="mailto:kaiquemachado5@gmail.com">Kaique Machado</a>.</p>
+      <p><a href="#" onclick="marcarPagina()">📌 Adicionar aos favoritos</a> — <a href="#" onclick="abrirContato()">✉️ Fale comigo</a></p>
+    </div>
+  </footer>
+  <div id="bookmarkMessage" class="custom-message" style="display:none;">Pressione <strong>Ctrl+D</strong> (ou <strong>⌘+D</strong>) para adicionar aos favoritos!</div>
+
+  <!-- Script para carregar termos -->
+  <script>
+    const CSV_URLS = {
+      brasil: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTRl-mFrT28Kzq5TAWm89A6OqVtKOZb2FWi5zd4lpu6Xvgin7VI-1R0LQugtkDxertXxZITNRelam-O/pub?output=csv",
+      mundo:  "https://docs.google.com/spreadsheets/d/e/2PACX-1vTIDu9G79jdYgthuurSgm4YzHXkF0ydpWnNfXwDLdrNd_tC3Zdxf3HNWPhpN4L0e33p-SLXlkf4gJhY/pub?output=csv"
+    };
+
+    let termos = { brasil: [], mundo: [] };
+    const ul = document.getElementById('lista-termos');
+    const btnBrasil = document.getElementById('btn-brasil');
+    const btnMundo = document.getElementById('btn-mundo');
+
+    async function carregarTermos(regiao) {
+      const url = CSV_URLS[regiao];
+      const res = await fetch(url);
+      const txt = await res.text();
+      termos[regiao] = txt.split('\n').slice(1)
+        .map(l => l.trim())
+        .filter(l => l && !l.startsWith(',') && !l.includes('undefined'));
+    }
+
+    function exibirTermos(regiao) {
+      ul.innerHTML = '';
+      termos[regiao].forEach(t => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${t}</span> <small>📋</small>`;
+        li.addEventListener('click', () => {
+          navigator.clipboard.writeText(t);
+          li.querySelector('small').textContent = '✅';
+          setTimeout(() => li.querySelector('small').textContent = '📋', 2000);
+        });
+        ul.appendChild(li);
+      });
+    }
+
+    function ativarBotao(regiao) {
+      btnBrasil.classList.toggle('black', regiao === 'brasil');
+      btnBrasil.classList.toggle('secondary', regiao !== 'brasil');
+      btnMundo.classList.toggle('black', regiao === 'mundo');
+      btnMundo.classList.toggle('secondary', regiao !== 'mundo');
+    }
+
+    async function init() {
+      await carregarTermos('brasil');
+      await carregarTermos('mundo');
+      exibirTermos('brasil');
+      ativarBotao('brasil');
+    }
+
+    btnBrasil.addEventListener('click', () => {
+      exibirTermos('brasil');
+      ativarBotao('brasil');
+    });
+
+    btnMundo.addEventListener('click', () => {
+      exibirTermos('mundo');
+      ativarBotao('mundo');
+    });
+
+    init();
+  </script>
+
+  <!-- Scripts utilitários -->
+  <script>
+    function marcarPagina() {
+      const msg = document.getElementById("bookmarkMessage");
+      msg.style.display = "block";
+      setTimeout(() => { msg.style.display = "none"; }, 5000);
+    }
+
+    function abrirContato() {
+      window.location.href = "mailto:kaiquemachado5@gmail.com";
+    }
+  </script>
+</body>
+</html>

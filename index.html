@@ -1,145 +1,186 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
-  <link rel="stylesheet" href="styles/style.css" />
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
   <title>Gerador de Tendências | Descubra com um Clique</title>
   <meta name="description" content="Gere ideias com base nas tendências atuais de múltiplas fontes — incluindo Google Trends, redes sociais e buscadores. Ideal para criadores de conteúdo." />
-  <meta name="keywords" content="tendências, termos populares, criadores de conteúdo, marketing digital, Google Trends, redes sociais" />
-  <meta name="author" content="Seu Nome ou Projeto" />
-
-  <!-- Open Graph / Social -->
-  <meta property="og:title" content="Gerador de Tendências - Para Criadores de Conteúdo" />
-  <meta property="og:description" content="Descubra o que está em alta com um clique. Dados de múltiplas fontes confiáveis da internet." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://kaiquemachado5.github.io/Gerador-de-Trends/" />
-  <meta property="og:image" content="https://kaiquemachado5.github.io/Gerador-de-Trends/images/logo-do-gerador-de-trends.png" />
-
   <link rel="icon" href="favicon.ico" />
+  <!-- Estilos e Fontes -->
   <link rel="stylesheet" href="styles/style.css" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    html {
+      scroll-padding-top: 120px;
+    }
+    section, main {
+      scroll-margin-top: 120px;
+    }
+  </style>
+  <!-- Scripts -->
+  <script src="scripts/title-templates.js" defer></script>
+  <script src="scripts/main.js" defer></script>
 </head>
 <body>
   <!-- Cabeçalho -->
   <header>
-    <div class="logo">
-      <img src="images/logo-do-gerador-de-trends.png" alt="Gerador de Tendências" />
-      <h1>Gerador de Tendências</h1>
+    <div class="header-inner">
+      <div class="logo">
+        <img src="images/logo-do-gerador-de-trends.png" alt="Logo do site" />
+        <h1>Gerador de Trends</h1>
+      </div>
+  
+      <nav class="nav-menu">
+        <a href="index.html" class="active">Início</a>
+        <a href="termos-em-alta.html" class="active">Termos em Alta</a>
+        <a href="sobre.html">Sobre</a>
+      </nav>
+          <!-- Novos controles de usuário -->
+    <div class="user-controls">
+      <span id="userStatus">Olá, Visitante</span>
+      <button id="btnLogin" class="secondary">Login</button>
+      <button id="btnDonate" class="secondary">Doar R$5</button>
+      <button id="btnPremium" class="secondary">Assinar Premium</button>
+      <button onclick="resetUserState()">Resetar Usuário</button>
     </div>
-    <nav>
-      <a href="sobre.html">Sobre</a>
-      <a href="termos-de-uso.html">Termos</a>
-    </nav>
+    </div>
   </header>
+  
+  <!-- Mensagem de limite diário -->
+  <div id="limitMessage" class="limit-message hidden">
+    <div class="limit-icon">⚠️</div>
+    <div class="limit-content">
+      <strong>Limite diário atingido!</strong>
+      <p>Modo Essencial: títulos mais básicos e variedade reduzida.</p>
+    </div>
+    <button class="limit-close">&times;</button>
+  </div>
+  
+  
 
   <!-- Conteúdo principal -->
   <main class="container">
-    <!-- Layout responsivo: generator e benefits lado a lado em desktop -->
-    <div class="main-grid">
-      <!-- Gerador de tendências -->
-      <div class="generator-card">
-        <h2>Descubra o que está em alta com um clique.</h2>
-        <p class="subhead">Inspire seu próximo conteúdo usando dados de diversas fontes confiáveis da internet.</p>
-
-        <!-- Seletor de Região -->
-        <div class="seletor-regiao">
-          <select id="regiao" onchange="atualizarTermos()">
-            <option value="" disabled selected>Escolha sua região</option>
-            <option value="brasil">Brasil</option>
+    <div class="two-columns">
+      <section class="termo-area trend-section"> 
+        <h2 class="trend-title">🔎 Descubra tendências em alta</h2>
+        <p class="intro-description">
+          Gere ideias poderosas com base em dados reais — alimentados por plataformas líderes como<br>
+          <strong>Google Trends, X, Answer the Public e YouTube</strong>.
+        </p>
+        <div class="select-region">
+          <label for="regiao">🌎 Região:</label>
+          <select id="regiao">
+            <option value="brasil" selected>Brasil</option>
             <option value="mundo">Mundo</option>
           </select>
         </div>
-
-        <!-- Ações: Gerar e Copiar -->
-        <div class="action-buttons" style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
-          <button class="primary" onclick="sortearTermo()">Gerar tendência</button>
-          <button id="copiarTermo" class="secondary" onclick="copiarTermo()">Copiar termo</button>
+        
+      
+        <div id="termoSorteado" class="resultado-box">🔍 Pronto para gerar um termo</div>
+      
+        <div class="button-row">
+          <button id="btnGerar" class="secondary">Sortear termo</button>
+          <button id="btnCopiarTermo" class="primary">Copiar termo</button>
         </div>
-
-        <!-- Resultado -->
-        <p id="resultado">🔍 Seu termo aparecerá aqui!</p>
+        
+      </section>
+      
+      <div class="cta-mobile">
+        <button onclick="scrollToGerador()">👉 Ir direto para o Gerador de Títulos</button>
       </div>
 
-      <!-- Benefícios -->
-      <div class="benefits">
-        <h3>Por que usar?</h3>
-        <div class="benefit-list">
-          <div class="benefit-item">🚀 Conteúdos sempre atualizados</div>
-          <div class="benefit-item">📡 Dados em tempo real de múltiplas fontes (incluindo Google Trends)</div>
-          <div class="benefit-item">🌍 Tendências globais e locais</div>
-          <div class="benefit-item">📱 Compartilhe facilmente com um clique</div>
+      <section class="benefits why-section" style="margin-top: 2.2rem"> 
+        <div class="benefit-grid">
+          <div class="benefit-card">
+            <div class="emoji">📡</div>
+            <strong>Conteúdo sempre relevante e atual</strong>
+          </div>
+          <div class="benefit-card">
+            <div class="emoji">🌍</div>
+            <strong>Dados em tempo real de fontes confiáveis</strong>
+          </div>
+          <div class="benefit-card">
+            <div class="emoji">📊</div>
+            <strong>Tendências globais e locais</strong>
+          </div>
+          <div class="benefit-card">
+            <div class="emoji">📱</div>
+            <strong>Insights para redes sociais, blogs e vídeos</strong>
+          </div>
         </div>
+      </section>
       </div>
-    </div>
 
-    <!-- Seção de Doação e Compartilhamento em tabela -->
-    <div class="donation-share-section">
-      <table class="donation-table">
-        <thead>
-          <tr>
-            <th colspan="2">Você é um usuário feliz?</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Compre-nos um café:</td>
-            <td><button class="secondary" onclick="window.location.href='https://www.buymeacoffee.com/SEU_USUARIO'">Doar</button></td>
-          </tr>
-          <tr>
-            <td>Compartilhar é se importar:</td>
-            <td class="share-buttons">
-              <a href="https://www.facebook.com/sharer/sharer.php?u=https://kaiquemachado5.github.io/Gerador-de-Trends/" target="_blank">Facebook</a>
-              <a href="https://twitter.com/intent/tweet?url=https://kaiquemachado5.github.io/Gerador-de-Trends/" target="_blank">Twitter</a>
-              <a href="https://www.reddit.com/submit?url=https://kaiquemachado5.github.io/Gerador-de-Trends/" target="_blank">Reddit</a>
-              <a href="https://www.linkedin.com/shareArticle?url=https://kaiquemachado5.github.io/Gerador-de-Trends/" target="_blank">LinkedIn</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Volte!</td>
-            <td><a href="javascript:window.location.reload();" class="secondary">Marcar página</a></td>
-          </tr>
-          <tr>
-            <td>Link para esta ferramenta:</td>
-            <td><input type="text" value="https://geradordetrends.github.io/Gerador-de-trends/" id="toolLink" readonly>
-            <button id="copiarLink" class="secondary" onclick="copiarLinkFerramenta()">Copiar</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Contate-nos:</td>
-            <td><a href="#" onclick="abrirContato()" class="secondary">Entrar em contato</a>
+      <div class="cta-desktop">
+        <button onclick="scrollToGerador()">👉 Ir direto para o Gerador de Títulos</button>
+      </div>
 
-              <script>
-              function abrirContato() {
-                // Tenta abrir o cliente de e-mail padrão
-                const mailtoLink = "mailto:geradordetrends@gmail.com?subject=Olá&body=Gostaria de saber mais sobre...";
-                const gmailLink = "https://mail.google.com/mail/?view=cm&fs=1&to=geradordetrends@gmail.com&su=Olá&body=Gostaria de saber mais sobre...";
-              
-                // Abre o mailto
-                window.location.href = mailtoLink;
-              
-                // Depois de 1,5s, assume que falhou e tenta abrir o Gmail
-                setTimeout(() => {
-                  window.open(gmailLink, '_blank');
-                }, 1500);
-              }
-              </script></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
-  </main>
+      <!-- Seção: Gerador de Títulos -->
+      <section class="gerador">
+        
+        <div id="userBanner" class="user-banner"></div>
+
+        <div id="loginCTA" class="login-cta hidden">
+          <p>🎁 Dica: Faça login para renovar suas requisições hoje!</p>
+          <button id="btnLoginCTA">Fazer login</button>
+        </div>
+        
+
+        <h2 class="gerador-titulo">💡 Gerador de Títulos Magnéticos</h2>
+        <p class="subhead">Crie títulos otimizados para SEO ou Copywriting com base no termo escolhido.</p>
+        <div class="input-area">
+          <label for="customTerm">Termo principal:</label>
+          <input type="text" id="customTerm" placeholder="Digite um termo ou use um sorteado" />
+          <label class="inline-label"><input type="checkbox" id="useRandom" /> Usar termo sorteado</label>
+        </div>
+        <div class="select-area">
+          <label for="grupo">Grupo:</label>
+          <select id="grupo">
+            <option value="seo">SEO (Tráfego)</option>
+            <option value="copywriting">Copywriting (Conversão)</option>
+          </select>
+          <label for="categoria">Categoria:</label>
+          <select id="categoria"></select>
+        </div>
+        <button id="gerar-titulos" class="primary">Gerar Títulos</button>
+        <ul id="titulosGerados"></ul>
+      </section>
+
+      <!-- Seção: Doação e Compartilhamento -->
+      <section class="donation-share-section">
+        <h2 class="donation-title">Curtiu o Gerador?</h2>
+        <p class="donation-subtext">Considere apoiar ou compartilhar com sua rede. 💙</p>
+      
+        <div class="donation-buttons">
+          <a href="https://mpago.la/1HArCB5" target="_blank" class="donate-btn black">💰 Doar R$3</a>
+          <a href="https://mpago.la/1ydkvsm" target="_blank" class="donate-btn black">💸 Doar R$5</a>
+        </div>
+      
+        <div class="donation-actions">
+          <input type="text" id="toolLink" value="https://kaiquemachado5.github.io/Gerador-de-Trends/" readonly />
+          <button id="copiarLink" class="secondary">Copiar link</button>
+        </div>
+
+        <div class="social-buttons">
+          <a href="https://facebook.com/sharer/sharer.php?u=https://kaiquemachado5.github.io/Gerador-de-Trends/" target="_blank" class="social-btn"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="https://twitter.com/intent/tweet?url=https://kaiquemachado5.github.io/Gerador-de-Trends/" target="_blank" class="social-btn"><i class="fab fa-twitter"></i> Twitter</a>
+          <a href="https://www.reddit.com/submit?url=https://kaiquemachado5.github.io/Gerador-de-Trends/" target="_blank" class="social-btn"><i class="fab fa-reddit"></i> Reddit</a>
+          <a href="https://api.whatsapp.com/send?text=Descubra%20termos%20em%20alta%20com%20o%20Gerador%20de%20Tendências!%20https://kaiquemachado5.github.io/Gerador-de-Trends/" target="_blank" class="social-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          <a href="https://www.instagram.com/kaiquemachado5/" target="_blank" class="social-btn"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>  
+      </section>
+      
+</main>
 
   <!-- Rodapé -->
   <footer class="footer">
-    <p>&copy; 2025 Gerador de Tendências. Feito com criatividade.</p>
+    <div class="container">
+      <p>&copy; 2025 Gerador de Tendências — Feito com 💙 por <a href="mailto:kaiquemachado5@gmail.com">Kaique Machado</a>.</p>
+      <p><a href="#" onclick="marcarPagina()">📌 Adicionar aos favoritos</a> — <a href="#" onclick="abrirContato()">✉️ Fale comigo</a></p>
+    </div>
   </footer>
 
-  <script src="scripts/main.js"></script>
+  <!-- Mensagem de bookmark -->
+  <div id="bookmarkMessage" class="custom-message" style="display:none;">Pressione <strong>Ctrl+D</strong> (ou <strong>⌘+D</strong>) para adicionar aos favoritos!</div>
 </body>
 </html>
