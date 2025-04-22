@@ -305,3 +305,25 @@ function copyText(text, btnEl, success='Copiado!', fallback='Copiar') {
     }
   });
 }
+
+
+/* Abrir email */
+function abrirEmail(email, assunto = '', corpo = '') {
+  const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+  const gmailLink = `https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(email)}&su=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+
+  // Tenta abrir mailto
+  const iframe = document.createElement('iframe');
+  iframe.style.display = 'none';
+  iframe.src = mailtoLink;
+  document.body.appendChild(iframe);
+
+  // Espera 1 segundo e, se o foco ainda estiver na mesma aba, abre o Gmail
+  setTimeout(() => {
+    const stillHere = !document.hidden;
+    if (stillHere) {
+      window.open(gmailLink, '_blank');
+    }
+    document.body.removeChild(iframe);
+  }, 1000);
+}

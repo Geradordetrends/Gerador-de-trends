@@ -897,9 +897,6 @@ button:disabled {
   font-style: italic;
 }
 
-.container.terms-page { 
-  max-width:900px; 
-}
 
 /* ———————————————————————————————— */
 /* Centraliza e limita largura do conteúdo */
@@ -943,7 +940,7 @@ button:disabled {
 .container.terms-page {
   background: #fff;
   width: min(90%, 900px);  /* ocupa até 90% da tela ou no máximo 900px */
-  margin: 2rem auto;       /* centraliza e dá espaçamento vertical */
+  margin: 9.5rem auto;       /* centraliza e dá espaçamento vertical */
   padding: 2rem 1rem;      /* respira internamente */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
